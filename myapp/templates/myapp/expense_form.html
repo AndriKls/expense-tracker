@@ -1,0 +1,46 @@
+{%extends 'base.html'%}
+{% block body %}
+
+<form method="POST" class="shadow-lg mx-10 mt-10 rounded-lg">
+    {% csrf_token %}
+    {% if form.errors %}
+    <div class="text-red-500">
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <div class="-form-container px-10 py-10 flex">
+        <div class="mx-10">
+            <div class="mb-5">
+                <label for="">Kulutuse nimi</label>
+            </div>
+            <div class="border">{{ form.name }}</div>
+        </div>
+        <div class="mx-10">
+            <div class="mb-5">
+                <label for="">Summa</label>
+            </div>
+            <div class="border">{{ form.amount }}</div>
+        </div>
+        <div class="mx-10">
+            <div class="mb-5">
+                <label for="">Kategooria</label>
+            </div>
+            <div class="border">{{ form.category }}</div>
+        </div>
+        <div class="mx-10 mt-9">
+            <button class="bg-green-500 px-5 py-2 rounded-lg text-white font-bold" type="submit">
+                Sisesta
+            </button>
+        </div>
+    </div>
+</form>
+{% endblock body %}

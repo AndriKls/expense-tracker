@@ -121,40 +121,83 @@
         </div>
         <hr>
         <div id="30-day-table">
-        
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Kuupäev
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                <div class="flex items-center">
+                                    Kulutused
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sum in daily_sums %}
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ sum.date }}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ sum.sum|intcomma }}€
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Kuupäev
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    <div class="flex items-center">
-                        Kulutused
-                        <a href="#"></a>
-                    </div>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {%for sum in daily_sums%}
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{sum.date}}
-                </th>
-                <td class="px-6 py-4">
-                    {{sum.sum|intcomma}}€
-                </td>
-            </tr>
-            
-            {%endfor%}
-        </tbody>
-    </table>
+    <!-- Teie antud tabel -->
+    <div class="w-1/2 shadow-lg m-10">
+        <div class="flex flex-wrap space-x-40 font-bold px-20 py-5">
+            <span>Kategooriate kaupa kulutused</span>
+        </div>
+        <hr>
+        <div id="category-table">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Kategooria
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                <div class="flex items-center">
+                                    Kulu
+                                </div>
+                            </th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sum in category_sums %}
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ sum.category }}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ sum.sum|intcomma }}€
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
-    </div>
+
+
+  
+
+    
+
 </div>
 {% endblock body %}
 

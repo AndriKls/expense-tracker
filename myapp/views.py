@@ -28,16 +28,19 @@ def index(request):
 
     daily_sums = Expense.objects.filter().values('date').order_by('date').annotate(sum=Sum('amount'))
 
+    category_sums = Expense.objects.filter().values('category').order_by('category').annotate(sum=Sum('amount'))
+
+
     if request.method == 'POST':
         expense_form = ExpenseForm(request.POST)
         if expense_form.is_valid():
             expense_form.save()
         return render(request, 'myapp/index.html', {
-            'expense_form': expense_form, 'expenses': expenses, 'total_expenses': total_expenses, 'yearly_sum': yearly_sum, 'monthly_sum': monthly_sum,'weekly_sum': weekly_sum, 'daily_sums': daily_sums})
+            'expense_form': expense_form, 'expenses': expenses, 'total_expenses': total_expenses, 'yearly_sum': yearly_sum, 'monthly_sum': monthly_sum,'weekly_sum': weekly_sum, 'daily_sums': daily_sums, 'category_sums': category_sums})
     else:
         expense_form = ExpenseForm()
         return render(request, 'myapp/index.html', {
-            'expense_form': expense_form, 'expenses': expenses, 'total_expenses': total_expenses, 'yearly_sum': yearly_sum, 'monthly_sum': monthly_sum,'weekly_sum': weekly_sum, 'daily_sums': daily_sums})
+            'expense_form': expense_form, 'expenses': expenses, 'total_expenses': total_expenses, 'yearly_sum': yearly_sum, 'monthly_sum': monthly_sum,'weekly_sum': weekly_sum, 'daily_sums': daily_sums, 'category_sums': category_sums})
 
 class UpdateExpenseView(UpdateView):
     model = Expense
